@@ -1,0 +1,11 @@
+const numero = Number(prompt('Digite um número:'));
+const numeroTItulo = document.getElementById('numero-titulo'); //pegando o id que declarei la no html, na tag H1
+const texto = document.getElementById('texto');
+numeroTItulo.innerHTML = numero; //Dessa forma eu substituo aquele número que esta no placeHolder
+texto.innerHTML = ''; //Dessa forma, a gente zera o html antes de começar as concatenações
+texto.innerHTML += `<p> Raiz quadrada:  ${numero ** 0.5} </p>`;
+texto.innerHTML += `<p>${numero} é inteiro: ${Number.isInteger(numero)}.</p>`;
+texto.innerHTML += `<p>Arredondando para baixo: ${Math.floor(numero)}.</p>`;
+texto.innerHTML += `<p>Arredondando para cima: ${Math.ceil(numero)}.</p>`;
+texto.innerHTML += `<p>Com duas casas decimais: ${numero.toFixed(2)}}.</p>`;
+texto.innerHTML += `<p> É NaN: ${Number.isNaN(numero)}. </p>`

@@ -10,9 +10,9 @@ const div = document.createElement('div'); //Estou criando uma tag div, mas aind
 
 //Agora vou percorrer o array que criei
 
-for (let i = 0; i < elementos.length; i++) {
+for (let i = 0; i < elementos.length; i++) { //Incrementando as tags com o loop
     //Agora vou utilizar desestruturação de objetos
-    let { tag, texto } = elementos[i];
+    let { tag, texto } = elementos[i]; //estou pegando a tag e o texto para desestrutura-los
     let tagCriada = document.createElement(tag);
     tagCriada.innerHTML = texto; //estou colocando dentro da tag criada um texto
     div.appendChild(tagCriada); //passando a tag criada para dentro da div

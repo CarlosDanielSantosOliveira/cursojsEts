@@ -15,6 +15,7 @@ funcao(1, 2, 3, 4, 5, 6, 7);
 function funcao2(a, b = 2, c = 3) {
     console.log(total, a, b, c)
 }
+
 funcao2(2);
 //Aqui nesse caso, mesmo que nao estamos passando nos argumentos de envio quanto vale o B e o C, o javascript reconhece os valores
 // porque eles foram passados no parametro da função. Caso eu enviasse com algum número, iria substituir os numeros passados no parametro.

@@ -50,4 +50,3 @@ ambas fazem as mesmas coisas, voce escolhe qual vai preferir fazer
 
 
 */
-

@@ -56,4 +56,4 @@ console.dir(funcao);
 console.dir(funcao2);
 
 //Console.dir nao tem diferença aqui no vsCode, mas no navegador
-//ele exime a função anônima que criamos 
+//ele exibe a função anônima que criamos 

@@ -1,0 +1,22 @@
+[
+{
+    "nome": "Carlos",
+    "email": "carlos@gmai.com",
+    "salario": "50000",
+    "estado": "SP",
+    "empresa": "X",
+    "idade": "22",
+    "sexo": "Masculino",
+    "cpf": "123.123.132-12"
+},
+{
+    "nome": "Daniel",
+    "email": "daniel@gmai.com",
+    "salario": "1000000",
+    "estado": "SP",
+    "empresa": "X",
+    "idade": "22",
+    "sexo": "Masculino",
+    "cpf": "123.123.156-12"
+}
+]

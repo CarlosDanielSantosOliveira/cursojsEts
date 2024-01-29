@@ -3,9 +3,8 @@
 //Esse é um componente stateFull, que é feito de classe.
 
 import React, { Component } from 'react';
-import { FaPlus } from 'react-icons/fa';
-import { FaEdit, FaWindowClose } from 'react-icons/fa';
-
+import Form from './Form';
+import Tarefas from './Tarefas';
 import './Main.css';
 
 export default class Main extends Component {
@@ -18,7 +17,8 @@ export default class Main extends Component {
         this.state = {
             //Inicializando um state
             novaTarefa: '',
-            tarefas: []
+            tarefas: [],
+            index: -1
         };
 
         this.handleChange = this.handleChange.bind(this); //Estou falando que dentro deste método, o this é a classe
@@ -39,19 +39,46 @@ export default class Main extends Component {
         }
     */
 
+    componentDidMount() {
+        const tarefas = JSON.parse(localStorage.getItem('tarefas'));
+
+        if (!tarefas) return;
+
+        this.setState({ tarefas });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { tarefas } = this.state;
+
+        if (tarefas === prevState.tarefas) return;
+
+        localStorage.setItem('tarefas', JSON.stringify(tarefas));
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        const { tarefas } = this.state;
+        const { tarefas, index } = this.state;
         let { novaTarefa } = this.state;
         novaTarefa = novaTarefa.trim(); //O trim serve para eliminar os espaços do fim da frase
 
-        if(tarefas.indexOf(novaTarefa) != -1) return;
+        if (tarefas.indexOf(novaTarefa) != -1) return;
 
         const novasTarefas = [...tarefas]; //Estamos trazendo as tarefas para essa variável, pois não podemos editar um estado diretamente.
 
-        this.setState({
-            tarefas: [...novasTarefas, novaTarefa]
-        });
+        if (index === -1) {
+            this.setState({
+                tarefas: [...novasTarefas, novaTarefa],
+                novaTarefa: '',
+            });
+        } else {
+            const novasTarefas = [...tarefas];
+            novasTarefas[index] = novaTarefa;
+
+            this.setState({
+                tarefas: [...novasTarefas],
+                index: -1,
+            })
+        }
     }
 
     handleChange(e) {
@@ -71,10 +98,13 @@ export default class Main extends Component {
     }
 
     handleEdit = (e, index) => {
-        console.log('Delete', index);
+        const { tarefas } = this.state;
+
+        this.setState({
+            index,
+            novaTarefa: tarefas[index]
+        })
     }
-
-
 
     render() {
 
@@ -84,23 +114,18 @@ export default class Main extends Component {
             <div className='main'>
                 <h1> Lista de tarefas </h1>
 
-                <form onSubmit={this.handleSubmit} action="#" className="form"> 
-                    <input onChange={this.handleChange} type="text" value={novaTarefa}/>
-                    <button type="submit"> 
-                        <FaPlus />
-                    </button>
-                </form>
+                <Form
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                    novaTarefa={novaTarefa}
+                />
 
-                <ul className='tarefas'>
-                    {tarefas.map((tarefa, index) => (
-                        <li key={tarefa}> {tarefa} 
-                        <span>
-                            <FaEdit  onClick={(e) => this.handleEdit(e, index)} className='edit'/>
-                            <FaWindowClose  onClick={(e) => this.handleDelete(e, index)} className='delete'/>
-                        </span>
-                        </li>
-                    ))}
-                </ul>
+                <Tarefas 
+                    tarefas={tarefas} 
+                    handleEdit={this.handleEdit}
+                    handleDelete={this.handleDelete}
+                />
+
             </div>
         )
     }

@@ -3,6 +3,9 @@
 //Esse é um componente stateFull, que é feito de classe.
 
 import React, { Component } from 'react';
+import { FaPlus } from 'react-icons/fa';
+import { FaEdit, FaWindowClose } from 'react-icons/fa';
+
 import './Main.css';
 
 export default class Main extends Component {
@@ -15,9 +18,10 @@ export default class Main extends Component {
         this.state = {
             //Inicializando um state
             novaTarefa: '',
-        }
+            tarefas: []
+        };
 
-        this.inputMudou = this.inputMudou.bind(this); //Estou falando que dentro deste método, o this é a classe
+        this.handleChange = this.handleChange.bind(this); //Estou falando que dentro deste método, o this é a classe
     }
 
     /*
@@ -35,24 +39,68 @@ export default class Main extends Component {
         }
     */
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { tarefas } = this.state;
+        let { novaTarefa } = this.state;
+        novaTarefa = novaTarefa.trim(); //O trim serve para eliminar os espaços do fim da frase
+
+        if(tarefas.indexOf(novaTarefa) != -1) return;
+
+        const novasTarefas = [...tarefas]; //Estamos trazendo as tarefas para essa variável, pois não podemos editar um estado diretamente.
+
+        this.setState({
+            tarefas: [...novasTarefas, novaTarefa]
+        });
+    }
+
     handleChange(e) {
         this.setState({
             novaTarefa: e.target.value
         });
     }
 
+    handleDelete = (e, index) => {
+        const { tarefas } = this.state;
+        const novasTarefas = [...tarefas];
+        novasTarefas.splice(index, 1);
+
+        this.setState({
+            tarefas: [...novasTarefas],
+        });
+    }
+
+    handleEdit = (e, index) => {
+        console.log('Delete', index);
+    }
+
+
+
     render() {
 
-        const { novaTarefa } = this.state;
+        const { novaTarefa, tarefas } = this.state;
 
         return (
             <div className='main'>
                 <h1> Lista de tarefas </h1>
 
-                <form action="#"> 
-                    <input onChange={this.handleChange} type="text" />
-                    <button type="submit"> Enviar </button>
+                <form onSubmit={this.handleSubmit} action="#" className="form"> 
+                    <input onChange={this.handleChange} type="text" value={novaTarefa}/>
+                    <button type="submit"> 
+                        <FaPlus />
+                    </button>
                 </form>
+
+                <ul className='tarefas'>
+                    {tarefas.map((tarefa, index) => (
+                        <li key={tarefa}> {tarefa} 
+                        <span>
+                            <FaEdit  onClick={(e) => this.handleEdit(e, index)} className='edit'/>
+                            <FaWindowClose  onClick={(e) => this.handleDelete(e, index)} className='delete'/>
+                        </span>
+                        </li>
+                    ))}
+                </ul>
             </div>
         )
     }

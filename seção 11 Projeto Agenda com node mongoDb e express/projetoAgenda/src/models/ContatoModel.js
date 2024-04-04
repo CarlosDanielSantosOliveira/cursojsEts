@@ -20,13 +20,6 @@ function Contato(body) {
     this.contato = null;
 }
 
-Contato.buscaPorId = async function(id) {
-    if(typeof id !== 'string') return;
-    const user = await ContatoModel.findById(id);
-
-    return user;
-}
-
 Contato.prototype.register = async function () {
     this.valida();
     if(this.errors.length > 0) return;
@@ -67,4 +60,25 @@ Contato.prototype.edit =  async function(id) {
     if(this.errors.length > 0) return;
     this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
 }
+
+//Métodos estáticos - aqueles que não vão para o prototype(Eles não acessam o this)
+Contato.buscaPorId = async function(id) {
+    if(typeof id !== 'string') return;
+    const contato = await ContatoModel.findById(id);
+
+    return contato;
+}
+
+Contato.buscaContato = async function(id) {
+   const contatos = await ContatoModel.find().sort({ criadoEm: -1 }); //Esse objeto dentro do sort é para nós filtrarmos os contatos por ordem descrescente 
+   return contatos;
+}
+
+Contato.delete = async function(id) {
+    if(typeof id !== 'string') return;
+
+    const contato = await ContatoModel.findOneAndDelete({_id: id});//Esse objeto dentro do sort é para nós filtrarmos os contatos por ordem descrescente 
+    return contato;
+ }
+
 module.exports = Contato;

@@ -6,7 +6,7 @@ const app = express();
 //Conectando com a base de dados
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.CONNECTIONSTRING, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.CONNECTIONSTRING, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then(() => {
         console.log('Conectei à base de dados.')
         app.emit('pronto') //Dessa forma, assim que a aplicação se conetar com o banco de dados, vai emitir uma mensagem de pronto

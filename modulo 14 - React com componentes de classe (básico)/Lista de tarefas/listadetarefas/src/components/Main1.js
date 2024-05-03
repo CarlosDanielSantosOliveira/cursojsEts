@@ -2,8 +2,8 @@
 //Ele vai possuir estado, logo, é uma classe
 import React, { Component } from 'react';
 import './Main.css';
-import { FaPlus } from 'react-icons/fa';
-import { FaEdit, FaWindowClose } from 'react-icons/fa';
+import Form from './Form';
+import Tarefas from './Tarefas';
 
 //Nesta classe nós estamos criando estado pela primeira forma.
 export default class Main extends Component {
@@ -20,6 +20,23 @@ export default class Main extends Component {
         }
 
         this.inputMudou = this.inputMudou.bind(this);
+    }
+
+    componentDidMount() {
+        const tarefas = JSON.parse(localStorage.getItem('tarefas'));
+
+        if(!tarefas) return;
+
+        this.setState({tarefas});
+    }
+
+    //prevProps são as propriedade e prevState é o estado anterior dos valores
+    componentDidUpdate(prevProps,prevState) {
+        const { tarefas } = this.state;
+
+        if (tarefas == prevState.tarefas) return;
+
+        localStorage.setItem('tarefas', JSON.stringify(tarefas));
     }
 
     handleSubmit = (e) => {
@@ -43,6 +60,7 @@ export default class Main extends Component {
             this.setState({
                 tarefas: [...novasTarefas],
                 index: -1,
+                novaTarefa: '',
             })
         }
 
@@ -84,29 +102,20 @@ export default class Main extends Component {
                 <h1> Lista de tarefas </h1>
                 <h1> {novaTarefa} </h1>
 
-                <form onSubmit={this.handleSubmit} action="#" className="form">
-                    <input onChange={this.inputMudou}
-                        type="text"
-                        value={novaTarefa}
-                    />
-                    <button type="submit">
-                        <FaPlus />
-                    </button>
+                <Form 
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                    novaTarefa={novaTarefa}
+                />
 
-                </form>
+                <Tarefas 
+                    tarefas={tarefas}
+                    handleEdit={this.handleEdit}
+                    handleDelete={this.handleDelete}
 
-                {/* Aqui nós vamos codar em javascript dentro do ul para mapear as tarefas da lista a cada volta do for */}
-                <ul className="tarefas">
-                    {tarefas.map((tarefa, index) => (
-                        <li key={tarefa}>
-                            {tarefa}
-                            <span>
-                                <FaEdit onClick={(e) => this.handleEdit(e, index)} className="edit" />
-                                <FaWindowClose onClick={(e) => this.handleDelete(e, index)} className="delete" />
-                            </span>
-                        </li> //Deixamos a propria tarefa como a chave do elemento
-                    ))}
-                </ul>
+                />
+
+                 
             </div>
         )
     }

@@ -1,0 +1,4 @@
+SUCRASE: Vai permitir que possamos utilizar os imports e exports dos modulos do ES6
+
+Vamos utilizar a arquitetura MVC na api.
+Express: ele é um framework para facilitar o desenvolvimento de api's com node.js, é como se fosse o spring boot 

@@ -1,27 +1,28 @@
 import React from 'react';
 import { FaEdit, FaWindowClose } from 'react-icons/fa';
-import './Tarefas.css';
-import PropTypes from 'prop-types';
+import PropTypes from '.prop-types';
 
-//Componente sem estado
-export default function Tarefas({tarefas, handleEdit, handleDelete}) {
+import './tarefas.css';
 
-    return (
-        <ul className='tarefas'>
-            {tarefas.map((tarefa, index) => (
-                <li key={tarefa}> {tarefa}
-                    <span>
-                        <FaEdit onClick={(e) => handleEdit(e, index)} className='edit' />
-                        <FaWindowClose onClick={(e) => handleDelete(e, index)} className='delete' />
-                    </span>
-                </li>
-            ))}
-        </ul>
-    )
+export default function Tarefas({ tarefas, handleEdit, handleDelete }) {
+    return(
+        /* Aqui nós vamos codar em javascript dentro do ul para mapear as tarefas da lista a cada volta do for */
+    <ul className="tarefas">
+        {tarefas.map((tarefa, index) => (
+            <li key={tarefa}>
+                {tarefa}
+                <span>
+                    <FaEdit onClick={(e) => handleEdit(e, index)} className="edit" />
+                    <FaWindowClose onClick={(e) => handleDelete(e, index)} className="delete" />
+                </span>
+            </li> //Deixamos a propria tarefa como a chave do elemento
+        ))}
+    </ul>
+    );
 }
 
-Tarefas.propTypes = {
+Tarefas.PropTypes = {
     tarefas: PropTypes.array.isRequired,
-    handleEdit: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired,
+    handleEdit: PropTypes.function.isRequired,
+    handleDelete: PropTypes.function.isRequired,
 }

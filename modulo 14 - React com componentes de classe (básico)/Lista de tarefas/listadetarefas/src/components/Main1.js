@@ -104,7 +104,7 @@ export default class Main extends Component {
 
                 <Form 
                     handleSubmit={this.handleSubmit}
-                    handleChange={this.handleChange}
+                    inputMudou={this.inputMudou}
                     novaTarefa={novaTarefa}
                 />
 

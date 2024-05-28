@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaEdit, FaWindowClose } from 'react-icons/fa';
-import PropTypes from '.prop-types';
+import PropTypes from 'prop-types';
 
 import './tarefas.css';
 
@@ -23,6 +23,6 @@ export default function Tarefas({ tarefas, handleEdit, handleDelete }) {
 
 Tarefas.PropTypes = {
     tarefas: PropTypes.array.isRequired,
-    handleEdit: PropTypes.function.isRequired,
-    handleDelete: PropTypes.function.isRequired,
+    handleEdit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
 }

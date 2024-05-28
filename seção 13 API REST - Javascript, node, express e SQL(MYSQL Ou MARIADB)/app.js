@@ -6,6 +6,7 @@ import userRoutes from './src/routes/userRoutes';
 import tokenRoutes from './src/routes/tokenRoutes';
 import alunoRoutes from './src/routes/AlunoRoutes';
 import fotoRoutes from './src/routes/fotoRoutes';
+import { resolve } from 'path';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ class App {
     middlewares() {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.json()); //Estamos usando esse this, pois, vamos capturar json's de formulários
+        this.app.use(express.static(resolve(__dirname, 'uploads'))); //Estamos usando esse this, pois, vamos capturar json's de formulários
     }
 
     routes() {

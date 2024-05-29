@@ -1,0 +1,7 @@
+export const primaryColor = '#C3073F';
+export const primaryDarkColor = '#171717';
+
+export const successColor = '#0197F6';
+export const infoColor = '#0197F6';
+export const errorColor = '#F2Af29'
+export const warningColor = '#F2Af29'

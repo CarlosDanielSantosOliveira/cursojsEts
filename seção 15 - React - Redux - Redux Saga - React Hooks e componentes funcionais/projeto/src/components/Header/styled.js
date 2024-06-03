@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colorNav, primaryColor } from '../../config/colors';
+import { colorFontNav, colorNav, primaryColor } from '../../config/colors';
 
 export const Nav = styled.nav`
     background: ${colorNav};
@@ -7,6 +7,7 @@ export const Nav = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
+    color: ${colorFontNav};
 
     a {
         color: #fff;

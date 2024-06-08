@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '../../styles/GlobalStyles';
 import { useDispatch } from 'react-redux';
  
-export default function Login() {
+export default function Fotos() {
 
     const dispatch = useDispatch();
 

@@ -7,13 +7,18 @@ import { AlunoContainer, ProfilePicture } from './styled';
 import Aluno from '../Aluno';
 import { get } from 'lodash';
 import { FaUserCircle, FaEdit, FaWindowClose } from 'react-icons/fa';
+import Loading from '../../components/Loading';
+
 export default function Alunos() {
     const [alunos, setAlunos] = useState([]);
+    const [isLoading, setIsloading] = useState(false);
 
     React.useEffect(() => {
         async function getData() {
+            setIsloading(true);
             const response = await axios.get('/alunos');
             setAlunos(response.data);
+            setIsloading(false);
         }
 
         getData();
@@ -22,13 +27,14 @@ export default function Alunos() {
     return (
 
         <Container>
+            <Loading isLoading={isLoading} />
             <h1> Alunos </h1>
             <AlunoContainer>
                 {alunos.map(aluno => (
 
                     <div key={String(aluno.id)}>
                         <ProfilePicture> 
-                        {get(aluno, 'Fotos[0].url', false) ? ( <img crossorigin="anonymous" src={aluno.Fotos[0].url} alt='' />) : (<FaUserCircle size={36} />)}
+                        {get(aluno, 'Fotos[0].url', false) ? ( <img crossOrigin="anonymous" src={aluno.Fotos[0].url} alt='' />) : (<FaUserCircle size={36} />)}
                         </ProfilePicture>
 
                         <span>{aluno.nome}</span>

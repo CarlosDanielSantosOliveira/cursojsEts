@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container } from '../../styles/GlobalStyles';
-import  { Form } from './styled';
+import { ContainerLogin, BodyStyle, Form } from './styled'
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/modules/auth/actions';
 import { get } from 'lodash';
 import Loading from '../../components/Loading';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Login(props) {
 
@@ -23,46 +23,49 @@ export default function Login(props) {
         e.preventDefault();
         let formErrors = false;
 
-        if(!isEmail(email)) {
-            formErrors = true; 
+        if (!isEmail(email)) {
+            formErrors = true;
             toast.error('Email inválido');
         }
 
-        if(password.length < 6 || password.length > 50) {
-            formErrors = true; 
+        if (password.length < 6 || password.length > 50) {
+            formErrors = true;
             toast.error('Senha inválida');
         }
 
-        if(formErrors) return;
+        if (formErrors) return;
 
-        dispatch(actions.loginRequest({email, password, prevPath}));
+        dispatch(actions.loginRequest({ email, password, prevPath }));
     };
 
     return (
 
-        <Container>
-            <Loading isLoading={isLoading} />
+        <BodyStyle> 
+        <div className="text-center d-flex justify-content-center">
+                <ContainerLogin className="col-md-8">
+                    <Loading isLoading={isLoading} />
 
-            <h1> Login </h1>
+                    <h1> Login </h1>
 
-            <Form onSubmit={handleSubmit}>
-                <input
-                 type="text" 
-                 value={email}
-                 onChange={e => setEmail(e.target.value)} 
-                 placeholder='Seu e-mail'
-                />
+                    <Form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            placeholder='Seu e-mail'
+                        />
 
-                <input
-                 type="password" 
-                 value={password}
-                 onChange={e => setPassword(e.target.value)} 
-                 placeholder='Sua senha'
-                />
-                  
-                <button type="submit"> Acessar </button>
-            </Form>
-        </Container>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            placeholder='Sua senha'
+                        />
 
+                        <button type="submit"> Acessar </button>
+                    </Form>
+                </ContainerLogin>           
+        </div>
+        </BodyStyle>
     )
 }

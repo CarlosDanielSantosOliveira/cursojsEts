@@ -8,12 +8,16 @@ import { ToastContainer } from "react-toastify";
 import { Provider } from 'react-redux';
 import store, { persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
+import background from "./img/fundo.png";
 
 //O Toastfy serve para exibir as mensagens de erro e sucesso do sistema
 
+ 
+
 function App() {
   return (
-    <Provider store={store}>
+    
+    <Provider store={store}  >
       <PersistGate persistor={persistor}>
         <Router history={history}>
           <Header />
@@ -23,6 +27,7 @@ function App() {
         </Router>
       </PersistGate>
     </Provider>
+    
 
   )
 }

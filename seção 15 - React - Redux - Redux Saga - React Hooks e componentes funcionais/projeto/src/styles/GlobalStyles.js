@@ -2,7 +2,7 @@ import {createGlobalStyle} from 'styled-components';
 import styled from 'styled-components';
 import * as colors from '../config/colors';
 import 'react-toastify/dist/ReactToastify.css';
-
+import background from "../img/fundo.png";
 export default createGlobalStyle`
     * {
         margin: 0;
@@ -11,13 +11,11 @@ export default createGlobalStyle`
         box-sizing: border-box;
     }
 
-    body {
-        font-family: sans-serif;
-        background: ${ colors.colorBody };
-        color: ${ colors.primaryDarkColor };
-    }
-
+   
     html, body, #root{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
         height: 100%;
     }
 
@@ -50,7 +48,7 @@ export default createGlobalStyle`
 export const Container = styled.section`
     max-width: 360px;
     background: #fff;
-    margin: 30px auto;
+    margin: 180px auto;
     padding: 30px;
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

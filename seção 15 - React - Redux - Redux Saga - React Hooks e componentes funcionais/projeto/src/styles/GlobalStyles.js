@@ -2,7 +2,7 @@ import {createGlobalStyle} from 'styled-components';
 import styled from 'styled-components';
 import * as colors from '../config/colors';
 import 'react-toastify/dist/ReactToastify.css';
-import background from "../img/fundo.png";
+
 export default createGlobalStyle`
     * {
         margin: 0;

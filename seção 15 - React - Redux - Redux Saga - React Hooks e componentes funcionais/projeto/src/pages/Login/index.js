@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContainerLogin, BodyStyle, Form } from './styled'
+import { ContainerLogin, ContainerConteudoDeLogin,BodyStyle, Form } from './styled'
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,9 @@ import * as actions from '../../store/modules/auth/actions';
 import { get } from 'lodash';
 import Loading from '../../components/Loading';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import agenda from "../../img/agenda.svg";
+import coolBackground from "../../img/cool-background.png";
+import { Link } from 'react-router-dom';
 
 export default function Login(props) {
 
@@ -40,11 +43,28 @@ export default function Login(props) {
 
     return (
 
-        <BodyStyle> 
-        <div className="text-center d-flex justify-content-center">
-                <ContainerLogin className="col-md-8">
-                    <Loading isLoading={isLoading} />
+        <BodyStyle>
+            <div className="text-center d-flex justify-content-center">
 
+
+                <Loading isLoading={isLoading} />
+
+
+               
+
+                <ContainerConteudoDeLogin style={{ backgroundImage: `url(${coolBackground})` }} className="col-md-6">
+                <h1> CRUD de gerênciamento de alunos </h1>
+                <img className="img-agenda" src={agenda}/>
+                <br/>
+
+                <Link to='/register'>
+                <button> Cadastre-se </button>
+                </Link>
+                </ContainerConteudoDeLogin>
+
+                <ContainerLogin className="col-md-6 d-flex justify-content-end">
+                    
+                    <div className="col-md-12">  
                     <h1> Login </h1>
 
                     <Form onSubmit={handleSubmit}>
@@ -64,8 +84,12 @@ export default function Login(props) {
 
                         <button type="submit"> Acessar </button>
                     </Form>
-                </ContainerLogin>           
-        </div>
+                    </div>
+                </ContainerLogin>
+
+
+
+            </div>
         </BodyStyle>
     )
 }

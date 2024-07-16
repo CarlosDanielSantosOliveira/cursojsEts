@@ -1,0 +1,9 @@
+A pasta pages armazenas as paginas da aplicação
+
+Toastfy: Serve para exibirmos mensagens de sucesso ou erro na tela do sistema
+Redux: Serve para mudarmos o estado do nosso componente global, isso significa que um sistema de login que precisamos
+chamar toda hora para saber se o usuário esta logado, pode ser gerenciado pelo Redux.
+A pasta modules serve para organizarmos varios reducers da aplicação
+Redux Saga: é um middleware que vai chamar o reducer através das requisições.
+Redux Persist: Serve para persistir os dados da aplicação, por ex: Podemos dizer que enquanto o site não recuperar todos os dados do local storage, as páginas não serão carregadas.
+

@@ -1,7 +1,7 @@
 export class Empresa {
     public readonly nome: string; //Readonly significa que não pode ser alterado
-    protected readonly colaboradores: Colaborador[] = [];
-    private readonly cnpj: string;
+    private readonly colaboradores: Colaborador[] = [];
+    protected readonly cnpj: string;
 
     constructor(nome: string, cnpj: string) {
         this.nome = nome;
@@ -18,6 +18,9 @@ export class Empresa {
         }
     }
 
+    public getNome(): string {
+        return this.nome;
+    }
 }
 
 export class Colaborador {
@@ -38,3 +41,10 @@ console.log(colaborador1)
 empresa1.adicionaColaborador(colaborador1);
 console.log("DADOS DA EMPRESA:", empresa1)
 empresa1.mostrarColaboradores()
+console.log(empresa1.getNome());
+
+/*
+public: significa que podemos acessar dentro e fora da classe.
+private: Só vou poder manipular dentro da classe. Eu posso dispobilizar esse atributo fora da classe, através dos atributos.
+
+*/

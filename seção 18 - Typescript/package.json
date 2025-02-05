@@ -1,5 +1,7 @@
 {
   "devDependencies": {
+    "@types/lodash": "^4.17.15",
+    "@types/validator": "^13.12.2",
     "typescript": "^5.5.3"
   }
 }

@@ -20,6 +20,8 @@ export class Order {
             return;
         }
 
+        this._orderStatus = 'closed';
+        
         this.messaging.sendMessage(`seu pedido com total de ${this.cart.total()} foi recebido.`);
         this.persistency.saveOrder();
         this.cart.clear();
